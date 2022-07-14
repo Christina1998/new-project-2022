@@ -1,81 +1,109 @@
 import logo from './logo.svg';
 import './App.css';
 import 'antd/dist/antd.css';
-import { Table } from 'antd';
-import axiosInstance from './Config/axios';
-import { useEffect, useState } from 'react';
+import { Card, Col, Row, Typography } from 'antd';
+import '../src/Styles/style.scss';
+import Icon, {
+  SnippetsFilled,
+  CaretUpFilled,
+  CaretDownFilled,
+  MinusOutlined,
+} from '@ant-design/icons';
+
+const { Title, Text } = Typography;
 
 function App() {
-  const [dataSource, setDataSource] = useState([]);
-  const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [key, setKey] = useState();
-
-  useEffect(() => {
-    fetchData(1);
-  }, []);
-
-  const columns = [
-    {
-      title: 'ID',
-      dataIndex: '_id',
-    },
-    {
-      title: 'Name',
-      dataIndex: 'name',
-    },
-    {
-      title: 'Trips',
-      dataIndex: 'trips',
-    },
-  ];
-
-  const fetchData = async (page) => {
-    setLoading(true);
-    try {
-      const response = await axiosInstance.get(
-        `/v1/passenger?page=${page}&size=10`
-      );
-      console.log('Response', response.data);
-      setDataSource(response.data.data);
-      setTotalPages(response.data.totalPages);
-      setKey(response.data.data._id);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const fetchRecords = (page) => {
-    setLoading(true);
-    fetch(
-      `https://api.instantwebtools.net/v1/passenger?page=${page}&size=10`
-    ).then((res) => {
-      res.json().then((response) => {
-        setDataSource(response.data);
-        setTotalPages(response.totalPages);
-        setLoading(false);
-        console.log(response);
-      });
-    });
-  };
-
   return (
-    <div className="App">
-      <Table
-        loading={loading}
-        columns={columns}
-        dataSource={dataSource}
-        key={key}
-        pagination={{
-          pageSize: 10,
-          total: totalPages,
-          onChange: (page) => {
-            fetchData(page);
-          },
-        }}
-      ></Table>
-    </div>
+    <Row
+      gutter={{
+        xs: 8,
+        sm: 16,
+        md: 24,
+        lg: 32,
+      }}
+      className="site-card-wrapper"
+    >
+      <Col lg={6}>
+        <Card className="card-wrapper" bordered={false}>
+          <SnippetsFilled
+            style={{
+              fontSize: 50,
+              float: 'right',
+              color: 'lightcoral',
+            }}
+          />
+          <Text type="secondary">Data a</Text>
+          <Title level={2} style={{ fontWeight: 'bold', marginTop: 0 }}>
+            340
+          </Title>
+          <Title level={4} style={{ color: 'lightgreen', marginTop: 0 }}>
+            <CaretUpFilled style={{ fontSize: 15, marginRight: 5 }} />
+            50,2%
+          </Title>
+          <Text type="secondary">John James Bond</Text>
+        </Card>
+      </Col>
+      <Col lg={6}>
+        <Card className="card-wrapper" bordered={false}>
+          <SnippetsFilled
+            style={{
+              fontSize: 50,
+              float: 'right',
+              color: 'lightblue',
+            }}
+          />
+          <Text type="secondary">Data a</Text>
+          <Title level={2} style={{ fontWeight: 'bold', marginTop: 0 }}>
+            500
+          </Title>
+          <Title level={4} style={{ color: 'lightcoral', marginTop: 0 }}>
+            <CaretDownFilled style={{ fontSize: 15, marginRight: 5 }} />
+            10,2%
+          </Title>
+          <Text type="secondary">John James Bond</Text>
+        </Card>
+      </Col>
+      <Col lg={6}>
+        <Card className="card-wrapper" bordered={false}>
+          <SnippetsFilled
+            style={{
+              fontSize: 50,
+              float: 'right',
+              color: 'lightgreen',
+            }}
+          />
+          <Text type="secondary">Data a</Text>
+          <Title level={2} style={{ fontWeight: 'bold', marginTop: 0 }}>
+            750
+          </Title>
+          <Title level={4} style={{ color: 'grey', marginTop: 0 }}>
+            <MinusOutlined style={{ fontSize: 15, marginRight: 5 }} />
+            0,00%
+          </Title>
+          <Text type="secondary">John James Bond</Text>
+        </Card>
+      </Col>
+      <Col lg={6}>
+        <Card className="card-wrapper" bordered={false}>
+          <SnippetsFilled
+            style={{
+              fontSize: 50,
+              float: 'right',
+              color: 'lightgrey',
+            }}
+          />
+          <Text type="secondary">Data a</Text>
+          <Title level={2} style={{ fontWeight: 'bold', marginTop: 0 }}>
+            250
+          </Title>
+          <Title level={4} style={{ color: 'lightgreen', marginTop: 0 }}>
+            <CaretUpFilled style={{ fontSize: 15, marginRight: 5 }} />
+            6,2%
+          </Title>
+          <Text type="secondary">John James Bond</Text>
+        </Card>
+      </Col>
+    </Row>
   );
 }
 

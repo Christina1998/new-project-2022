@@ -1,0 +1,13 @@
+.site-card-wrapper {
+  padding: 40px;
+  background: #ececec;
+  display: flex;
+}
+
+.card-wrapper {
+  width: 100%;
+  border-radius: 10px;
+  .customer-name {
+    color: grey;
+  }
+}
