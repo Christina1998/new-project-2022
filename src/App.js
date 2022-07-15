@@ -11,6 +11,72 @@ import Icon, {
 } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
+const obj = [
+  {
+    title: 'Data a',
+    count: 340,
+    percent: '50,2%',
+    name: 'John James Bond',
+    icon: (
+      <SnippetsFilled
+        style={{
+          fontSize: 50,
+          float: 'right',
+          color: 'lightcoral',
+        }}
+      />
+    ),
+    percentIcon: <CaretUpFilled style={{ fontSize: 15, marginRight: 5 }} />,
+  },
+  {
+    title: 'Data b',
+    count: 500,
+    percent: '10,2%',
+    name: 'John James Bond',
+    icon: (
+      <SnippetsFilled
+        style={{
+          fontSize: 50,
+          float: 'right',
+          color: 'lightblue',
+        }}
+      />
+    ),
+    percentIcon: <CaretDownFilled style={{ fontSize: 15, marginRight: 5 }} />,
+  },
+  {
+    title: 'Data c',
+    count: 750,
+    percent: '0,00%',
+    name: 'James Bond',
+    icon: (
+      <SnippetsFilled
+        style={{
+          fontSize: 50,
+          float: 'right',
+          color: 'lightgreen',
+        }}
+      />
+    ),
+    percentIcon: <MinusOutlined style={{ fontSize: 15, marginRight: 5 }} />,
+  },
+  {
+    title: 'Data d',
+    count: 250,
+    percent: '6,2%',
+    name: 'James Bond',
+    icon: (
+      <SnippetsFilled
+        style={{
+          fontSize: 50,
+          float: 'right',
+          color: 'lightgrey',
+        }}
+      />
+    ),
+    percentIcon: <CaretUpFilled style={{ fontSize: 15, marginRight: 5 }} />,
+  },
+];
 
 function App() {
   return (
@@ -23,86 +89,24 @@ function App() {
       }}
       className="site-card-wrapper"
     >
-      <Col lg={6}>
-        <Card className="card-wrapper" bordered={false}>
-          <SnippetsFilled
-            style={{
-              fontSize: 50,
-              float: 'right',
-              color: 'lightcoral',
-            }}
-          />
-          <Text type="secondary">Data a</Text>
-          <Title level={2} style={{ fontWeight: 'bold', marginTop: 0 }}>
-            340
-          </Title>
-          <Title level={4} style={{ color: 'lightgreen', marginTop: 0 }}>
-            <CaretUpFilled style={{ fontSize: 15, marginRight: 5 }} />
-            50,2%
-          </Title>
-          <Text type="secondary">John James Bond</Text>
-        </Card>
-      </Col>
-      <Col lg={6}>
-        <Card className="card-wrapper" bordered={false}>
-          <SnippetsFilled
-            style={{
-              fontSize: 50,
-              float: 'right',
-              color: 'lightblue',
-            }}
-          />
-          <Text type="secondary">Data a</Text>
-          <Title level={2} style={{ fontWeight: 'bold', marginTop: 0 }}>
-            500
-          </Title>
-          <Title level={4} style={{ color: 'lightcoral', marginTop: 0 }}>
-            <CaretDownFilled style={{ fontSize: 15, marginRight: 5 }} />
-            10,2%
-          </Title>
-          <Text type="secondary">John James Bond</Text>
-        </Card>
-      </Col>
-      <Col lg={6}>
-        <Card className="card-wrapper" bordered={false}>
-          <SnippetsFilled
-            style={{
-              fontSize: 50,
-              float: 'right',
-              color: 'lightgreen',
-            }}
-          />
-          <Text type="secondary">Data a</Text>
-          <Title level={2} style={{ fontWeight: 'bold', marginTop: 0 }}>
-            750
-          </Title>
-          <Title level={4} style={{ color: 'grey', marginTop: 0 }}>
-            <MinusOutlined style={{ fontSize: 15, marginRight: 5 }} />
-            0,00%
-          </Title>
-          <Text type="secondary">John James Bond</Text>
-        </Card>
-      </Col>
-      <Col lg={6}>
-        <Card className="card-wrapper" bordered={false}>
-          <SnippetsFilled
-            style={{
-              fontSize: 50,
-              float: 'right',
-              color: 'lightgrey',
-            }}
-          />
-          <Text type="secondary">Data a</Text>
-          <Title level={2} style={{ fontWeight: 'bold', marginTop: 0 }}>
-            250
-          </Title>
-          <Title level={4} style={{ color: 'lightgreen', marginTop: 0 }}>
-            <CaretUpFilled style={{ fontSize: 15, marginRight: 5 }} />
-            6,2%
-          </Title>
-          <Text type="secondary">John James Bond</Text>
-        </Card>
-      </Col>
+      {obj.map((data) => {
+        return (
+          <Col lg={6}>
+            <Card className="card-wrapper" bordered={false}>
+              {data.icon}
+              <Text type="secondary">{data.title}</Text>
+              <Title level={2} style={{ fontWeight: 'bold', marginTop: 0 }}>
+                {data.count}
+              </Title>
+              <Title level={4} style={{ color: 'lightgreen', marginTop: 0 }}>
+                {data.percentIcon}
+                {data.percent}
+              </Title>
+              <Text type="secondary">{data.name}</Text>
+            </Card>
+          </Col>
+        );
+      })}
     </Row>
   );
 }
