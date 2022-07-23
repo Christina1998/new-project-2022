@@ -1,134 +1,249 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, Component } from 'react';
 import 'antd/dist/antd.css';
-import {
-  Button,
-  Form,
-  Input,
-  InputNumber,
-  Typography,
-  Col,
-  Row,
-  Image,
-} from 'antd';
 import '../src/Styles/style.scss';
-import { MailOutlined, LockOutlined } from '@ant-design/icons';
-
+import { Typography, Layout, Menu, Button, Col, Row, Image } from 'antd';
+import Slider from './components/Slider';
+import HeaderMain from './components/Header';
+import FooterMain from './components/Footer';
+import {
+  RightOutlined,
+  TwitterOutlined,
+  LinkedinFilled,
+} from '@ant-design/icons';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { BrowserRouter } from 'react-router-dom';
 const { Title, Text } = Typography;
-
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-
-const validateMessages = {
-  required: '${label} is required!',
-  types: {
-    email: '${label} is not a valid email!',
-    number: '${label} is not a valid number!',
-  },
-  number: {
-    range: '${label} must be between ${min} and ${max}',
-  },
-};
+const { Content, Footer } = Layout;
 
 function App() {
-  const onFinish = (values) => {
-    console.log(values);
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
-
   return (
-    <Row>
-      <Col span={16}>
-        <header className="App-header">
-          <Title level={3} style={{ fontWeight: 'bold' }}>
-            Sign Up
-          </Title>
-          <Text type="secondary" style={{ fontSize: 13, textAlign: 'left' }}>
-            Already have an account? Sign In
-          </Text>
-          <Form
-            name="basic"
-            labelCol={{ span: 12 }}
-            className="form"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
+    <BrowserRouter>
+      <Layout>
+        <div className="background">
+          <div className="header-icon">
+            <TwitterOutlined />
+            <LinkedinFilled />
+          </div>
+          <HeaderMain />
+          <Content
+            className="site-layout"
+            style={{
+              paddingTop: '20px',
+            }}
           >
-            <label required>Email</label>
-            <Form.Item
-              name="email"
-              prefix={<MailOutlined className="item-icon" />}
-              rules={[
-                { required: true, message: 'Please input your email!' },
-                { type: 'email' },
-                { min: 3 },
-                { whitespace: true },
-              ]}
-              className="input_label"
+            <div
+              className="site-layout-background"
+              style={{
+                padding: 24,
+                minHeight: 550,
+              }}
             >
-              <Input
-                prefix={<MailOutlined className="item-icon" />}
-                className="input"
-              />
-            </Form.Item>
-            <label required>Password</label>
-            <Form.Item
-              name="password"
-              rules={[
-                { required: true, message: 'Please input your password!' },
-              ]}
+              <Row>
+                <Col span={18}>
+                  <Title
+                    style={{ fontSize: 60, color: '#003A92' }}
+                    className="main-title"
+                  >
+                    Ullamcorper diam turpis egestas egestas fames enim risus sed
+                    proin fames enim risus sed proin
+                  </Title>
+                </Col>
+                <Col span={6}>
+                  <div className="read-button">
+                    <Button size="large">Primary</Button>
+                    <Button size="large">
+                      <RightOutlined />
+                    </Button>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+            <div
+              className="image-container"
+              style={{
+                minHeight: 300,
+                float: 'right',
+              }}
             >
-              <Input.Password
-                prefix={<LockOutlined className="item-icon" />}
-                className="input"
+              <Image
+                className="image"
+                preview={false}
+                src="/images/image.jpg"
               />
-            </Form.Item>
-            <label>Confirm Password</label>
+            </div>
+            <div
+              style={{
+                paddingTop: 400,
 
-            <Form.Item
-              name="confirm_password"
-              dependencies={['password']}
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password again!',
-                },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue('password') === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(
-                      'The password you entered doesnot match'
-                    );
-                  },
-                }),
-              ]}
+                minHeight: 550,
+                backgroundColor: '#f2efee',
+              }}
             >
-              <Input.Password
-                prefix={<LockOutlined className="item-icon" />}
-                className="input"
-              />
-            </Form.Item>
+              <Row>
+                <Col span={12} style={{ paddingLeft: 85 }}>
+                  <Title level={3} style={{ color: '#003A92', paddingTop: 90 }}>
+                    Latest News
+                  </Title>
+                  <div
+                    style={{
+                      padding: 30,
+                      borderStyle: 'solid',
+                      borderColor: 'white',
+                    }}
+                  >
+                    <Image
+                      className="latest-image"
+                      preview={false}
+                      src="/images/news.jpg"
+                    />
+                    <Text type="secondary">November 19 --2020</Text>
+                    <Title level={2} style={{ marginBottom: 80 }}>
+                      Molestie molesti metus, tempus in commodo, semper tellus
+                      tempus in commodo, semper tellus
+                    </Title>
+                  </div>
+                </Col>
+                <Col span={12} style={{ paddingRight: 90 }}>
+                  <div
+                    style={{
+                      padding: 30,
+                      borderStyle: 'solid',
+                      borderColor: 'white',
+                    }}
+                  >
+                    <Image
+                      className="image-latest"
+                      preview={false}
+                      src="/images/news-image.jpg"
+                    />
+                    <Text type="secondary">November 19 --2020</Text>
+                    <Title level={3}>
+                      Molestie molesti metus, tempus in commodo, semper tellus
+                      tempus in commodo, semper tellus
+                    </Title>
+                  </div>
 
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-              <Button type="primary" htmlType="submit" className="button">
-                Submit
-              </Button>
-            </Form.Item>
-          </Form>
-        </header>
-      </Col>
-      <Col span={8}>
-        <Image className="image" preview={{ visible: false }} src="/pic.png" />
-      </Col>
-    </Row>
+                  <Row>
+                    <Col span={12}>
+                      <div
+                        style={{
+                          padding: 30,
+                          borderStyle: 'solid',
+                          borderColor: 'white',
+                        }}
+                      >
+                        <Image preview={false} src="/images/news-image-1.jpg" />
+                        <Text type="secondary">November 19 --2020</Text>
+                        <Title level={4}>
+                          In faucibus suspendisse magna massa nibh elementum
+                          augue phasellus tristique senectus urna
+                        </Title>
+                      </div>
+                    </Col>
+                    <Col span={12}>
+                      <div
+                        style={{
+                          padding: 30,
+                          borderStyle: 'solid',
+                          borderColor: 'white',
+                        }}
+                      >
+                        <Image preview={false} src="/images/news-image-2.jpg" />
+                        <Text type="secondary">November 19 --2020</Text>
+                        <Title level={4}>
+                          In faucibus suspendisse magna massa nibh elementum
+                          augue phasellus tristique senectus urna
+                        </Title>
+                      </div>
+                    </Col>
+                  </Row>
+                  <div></div>
+                </Col>
+              </Row>
+              <div className="overlap-image-2">
+                <div className="red-background">
+                  <Text className="text-1">OUR MISSION</Text>
+                  <Text className="text-2">
+                    Imperdiet quis leo scelerisque nunc magna mattis vitae non
+                    non
+                  </Text>
+                  <Text className="text-3">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                  </Text>
+                </div>
+                <div>
+                  <Image
+                    className="red-image"
+                    preview={false}
+                    src="/images/red-house.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </Content>
+        </div>
+        <div className="white-background">
+          <Text className="slider-title">Beneficiaries</Text>
+          <Slider />
+          <div className="image-overlap-3">
+            <div className="brown-background">
+              <Text className="founder-title">The Founders</Text>
+            </div>
+            <div>
+              <Row>
+                <Col span={2}></Col>
+                <Col span={20}>
+                  <Image
+                    className="founder-image"
+                    preview={false}
+                    alt="Maria Kenter"
+                    src="/images/founders.jpg"
+                  />
+                  <div class="text-on-image">
+                    <p> Maria Kenter</p>
+                    <p>Roger Septimus</p>
+                  </div>
+                </Col>
+                <Col span={2}></Col>
+              </Row>
+            </div>
+          </div>
+          <div className="gallery">
+            <Text className="gallery-text">Gallery</Text>
+            <Row>
+              <Col span={8}>
+                <div className="gallery-photos">
+                  <Image preview={false} src="/images/gallery-1.jpg" />
+                  <Text className="gallery-caption">
+                    Caption lorem ipsum dolor sit amet
+                  </Text>
+                </div>
+              </Col>
+              <Col span={8}>
+                <div className="gallery-photos">
+                  <Image preview={false} src="/images/gallery-2.jpg" />
+                  <Text className="gallery-caption">
+                    Caption lorem ipsum dolor sit amet
+                  </Text>
+                </div>
+              </Col>
+              <Col span={8}>
+                <div className="gallery-photos">
+                  <Image preview={false} src="/images/gallery-3.jpg" />
+                  <Text className="gallery-caption">
+                    Caption lorem ipsum dolor sit amet
+                  </Text>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </div>
+        <FooterMain />
+      </Layout>
+    </BrowserRouter>
   );
 }
 
